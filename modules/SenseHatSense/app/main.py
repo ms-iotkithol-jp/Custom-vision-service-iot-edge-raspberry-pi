@@ -16,7 +16,8 @@ from sense_hat import SenseHat
 import datetime
 
 RECEIVE_CALLBACKS = 0
-SEND_SENSEHAT_CALLBACKS = 1
+SEND_SENSEHAT_CALLBACKS = 0
+SEND_CALLBACKS = 0
 
 # read sense hat and send
 def read_and_send_measurements_from_sensehat(hubManager):

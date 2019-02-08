@@ -7,3 +7,6 @@ SenseHat-Sense module access to Sense Hat sensors, collect measured data and sen
 ## How to use
 You can run this modules on Azure IoT Edge runtime by just the way described in [README.md](./README.md). 
 But build is spent very long time ;-)
+
+## Reference
+I refere [Raspberry PI+SenseHat sample in hackster](https://www.hackster.io/ngkurt/azure-iot-edge-with-sense-hat-and-raspberry-pi-06791b) to create SenseHat-Sense module. Thank [Gökhan Kurt](https://www.hackster.io/ngkurt)!
