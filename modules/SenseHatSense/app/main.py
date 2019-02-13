@@ -18,6 +18,7 @@ import datetime
 RECEIVE_CALLBACKS = 0
 SEND_SENSEHAT_CALLBACKS = 0
 SEND_CALLBACKS = 0
+TWIN_CONTEXT = 0
 
 # read sense hat and send
 def read_and_send_measurements_from_sensehat(hubManager):
@@ -62,9 +63,27 @@ def receive_message_callback(message, hubManager):
     hubManager.send_event_to_output("output1", message, 0)
     return IoTHubMessageDispositionResult.ACCEPTED
 
+twin_telemetry_cycle_ms = 5000
+
+# module_twin_callback is invokged when module twin desired properties are updated.
+def module_twin_callback(update_state, payload, user_context):
+    global twin_telemetry_cycle_ms
+    print("")
+    print("Twin callback called with:")
+    print("updateStatus: %s" % update_state)
+    print("context: %s" % user_context)
+    print("payload: %s" % payload)
+    data = json.loads(payload)
+    if "telemetry-cycle-ms" in data :
+        twin_telemetry_cycle_ms = data["telemetry-cycle-ms"]
+        print("received - %d msec" % twin_telemetry_cycle_ms)
+
+
+
 class HubManager(object):
 
     def __init__(self):
+        global TWIN_CONTEXT
         # Defines settings of the IoT SDK
         protocol = IoTHubTransportProvider.MQTT
         self.client_protocol = protocol
@@ -76,7 +95,9 @@ class HubManager(object):
         # sets the callback when a message arrives on "input1" queue.  Messages sent to 
         # other inputs or to the default will be silently discarded.
         self.client.set_message_callback("input1", receive_message_callback, self)
-        print ( "Module is now waiting for messages in the input1 queue.")
+        print("Module is now waiting for messages in the input1 queue.")
+        self.client.set_module_twin_callback(module_twin_callback, TWIN_CONTEXT)
+        print("Module is now waiting for device twin updating.")
 
     def send_event_to_output(self, outputQueueName, event, send_context):
         self.client.send_event_async(outputQueueName, event, send_confirmation_callback, send_context)
@@ -86,6 +107,7 @@ class HubManager(object):
 
 
 def main():
+    global twin_telemetry_cycle_ms
     try:
         print ( "\nPython %s\n" % sys.version )
         print ( "IoT Hub Client for Python" )
@@ -97,7 +119,7 @@ def main():
 
         while True:
             read_and_send_measurements_from_sensehat(hub_manager)
-            time.sleep(5)
+            time.sleep(float(twin_telemetry_cycle_ms)/1000.0)
 
     except IoTHubError as iothub_error:
         print ( "Unexpected error %s from IoTHub" % iothub_error )
