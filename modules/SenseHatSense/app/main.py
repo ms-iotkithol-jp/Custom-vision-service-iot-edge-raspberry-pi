@@ -19,20 +19,24 @@ RECEIVE_CALLBACKS = 0
 SEND_SENSEHAT_CALLBACKS = 0
 SEND_CALLBACKS = 0
 TWIN_CONTEXT = 0
+sense = SenseHat()
 
 # read sense hat and send
-def read_and_send_measurements_from_sensehat(hubManager):
+def read_and_send_measurements_from_sensehat(sense, hubManager):
     global SEND_SENSEHAT_CALLBACKS
-    sense = SenseHat()
-    sense.clear()
+    # sense.clear()
     temperature = sense.get_temperature()
     temperature_h = sense.get_temperature_from_humidity()
     temperature_p = sense.get_temperature_from_pressure()
     humidity = sense.get_humidity()
     pressure = sense.get_pressure()
+    accelerometer = sense.get_accelerometer_raw()
+    accel = "\"x\":{x:.5f},\"y\":{y:.5f},\"z\":{z:.5f}".format(**accelerometer)
+    print("accelerometer - %s" % accel)
+
     timeCreated = datetime.datetime.utcnow().isoformat()
-    MSG_TXT = "{\"temperature\": %.2f,\"temperature_h\": %.2f,\"temperature_p\": %.2f,\"humidity\": %.2f,\"pressure\": %.2f,\"timeCreated\": \"%s\"}"
-    msg_txt_formatted = MSG_TXT % (temperature, temperature_h, temperature_p, humidity, pressure, timeCreated)
+    MSG_TXT = "{\"temperature\": %.2f,\"temperature_h\": %.2f,\"temperature_p\": %.2f,\"humidity\": %.2f,\"pressure\": %.2f,\"accelerometer\":{%s},\"timeCreated\": \"%s\"}"
+    msg_txt_formatted = MSG_TXT % (temperature, temperature_h, temperature_p, humidity, pressure, accel, timeCreated)
     print("Sending - :%s\n" % msg_txt_formatted)
     message = IoTHubMessage(msg_txt_formatted)
     hubManager.send_event_to_output("output2", message, 0)
@@ -115,10 +119,14 @@ def main():
         hub_manager = HubManager()
 
         print ( "Starting the IoT Hub Python sample using protocol %s..." % hub_manager.client_protocol )
-        print ( "The sample is now waiting for messages and will indefinitely.  Press Ctrl-C to exit. ")
+        print("The sample is now waiting for messages and will indefinitely.  Press Ctrl-C to exit. ")
+        
+        sense = SenseHat()
+        time.sleep(1)
+        sense.set_imu_config(False,False,True)
 
         while True:
-            read_and_send_measurements_from_sensehat(hub_manager)
+            read_and_send_measurements_from_sensehat(sense, hub_manager)
             time.sleep(float(twin_telemetry_cycle_ms)/1000.0)
 
     except IoTHubError as iothub_error:

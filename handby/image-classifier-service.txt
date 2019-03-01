@@ -1,0 +1,10 @@
+名前：
+image-classifier-service
+
+イメージのURI：
+docker.io/embeddedgeorge/imageclassifierservice:0.2.4-arm32v7
+
+コンテナーの作成オプション：
+
+環境変数：
+

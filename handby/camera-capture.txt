@@ -1,0 +1,35 @@
+名前：
+camera-cameracapture
+
+イメージのURI：
+docker.io/embeddedgeorge/cameracapture:0.2.7-arm32v7
+
+コンテナーの作成オプション：
+{
+  "HostConfig": {
+    "PortBindings": {
+      "5012/tcp": [
+        {
+          "HostPort": "5012"
+        }
+      ]
+    },
+    "Binds": [
+      "/dev/video0:/dev/video0"
+    ],
+    "Devices": [
+      {
+        "PathOnHost": "/dev/video0",
+        "PathInContainer": "/dev/video0",
+        "CgroupPermissions": "mrw"
+      }
+    ]
+  }
+}
+
+環境変数：
+VIDEO_PATH:0
+IMAGE_PROCESSING_ENDPOINT:http://image-classifier-service:80/image
+RESIZE_WIDTH:256
+RESIZE_HEIGHT:256
+SHOW_VIDEO:True
