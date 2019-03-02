@@ -1,5 +1,5 @@
 名前：
-camera-cameracapture
+camera-capture
 
 イメージのURI：
 docker.io/embeddedgeorge/cameracapture:0.2.7-arm32v7
