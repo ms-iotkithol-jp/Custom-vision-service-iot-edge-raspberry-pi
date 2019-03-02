@@ -1,0 +1,20 @@
+名前：
+sensehat-sense
+
+イメージのURI：
+docker.io/embeddedgeorge/sensehatsense:0.3.00-arm32v7
+
+コンテナーの作成オプション：
+{
+  "HostConfig": {
+    "Binds": [
+      "/dev/i2c1:/dev/i2c1"
+    ],
+    "Privileged": true
+  }
+}
+環境変数：
+
+メッセージルート
+,
+                    "SenseHatSenseToIoTHub": "FROM /messages/modules/sensehat-sense/outputs/* INTO $upstream"
