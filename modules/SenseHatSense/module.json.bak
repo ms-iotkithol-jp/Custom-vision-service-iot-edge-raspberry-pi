@@ -4,7 +4,7 @@
     "image": {
         "repository": "$CONTAINER_REGISTRY_ADDRESS/sensehatsense",
         "tag": {
-            "version": "0.3.12",
+            "version": "0.3.10",
             "platforms": {
                 "arm32v7": "./arm32v7.Dockerfile"
             }

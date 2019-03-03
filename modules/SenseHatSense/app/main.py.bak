@@ -39,10 +39,6 @@ def read_and_send_measurements_from_sensehat(sense, hubManager):
     msg_txt_formatted = MSG_TXT % (temperature, temperature_h, temperature_p, humidity, pressure, accel, timeCreated)
     print("Sending - :%s\n" % msg_txt_formatted)
     message = IoTHubMessage(msg_txt_formatted)
-    prop_map = message.properties()
-    prop_map.add("data-type","sensing")
-    prop_map.add("application","Custom-vision-service-iot-edge-raspberry-pi-ext")
-
     hubManager.send_event_to_output("output2", message, 0)
     SEND_SENSEHAT_CALLBACKS += 1
     print ( "    Total sensehat messages sent: %d" % SEND_SENSEHAT_CALLBACKS )

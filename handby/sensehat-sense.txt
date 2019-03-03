@@ -2,7 +2,7 @@
 sensehat-sense
 
 イメージのURI：
-docker.io/embeddedgeorge/sensehatsense:0.3.00-arm32v7
+docker.io/embeddedgeorge/sensehatsense:0.3.12-arm32v7
 
 コンテナーの作成オプション：
 {
