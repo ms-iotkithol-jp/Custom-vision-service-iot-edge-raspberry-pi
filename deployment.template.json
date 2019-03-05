@@ -77,7 +77,7 @@
                             }
                         },
                         "settings": {
-                            "image": "${MODULES.SenseHatDisplay}",
+                            "image": "${MODULES.SenseHatDisplay.arm32v7}",
                             "createOptions": {
                                 "HostConfig": {
                                     "Binds": [
@@ -95,7 +95,7 @@
                         "restartPolicy": "always",
                         "env": {},
                         "settings": {
-                            "image": "${MODULES.SenseHatSense}",
+                            "image": "${MODULES.SenseHatSense.arm32v7}",
                             "createOptions": {
                                 "HostConfig": {
                                     "Binds": [
