@@ -1,4 +1,5 @@
-# IoT ハッカソンのお供にどうぞ
+# IoT ハッカソンのお供にどうぞ 
+## 概要
 IoTのハッカソンを行う際の基礎トレーニングとしてお使いください。 
 
 → [資料](https://1drv.ms/p/s!Aihe6QsTtyqct-I1zXPlUX563JNgvg) 

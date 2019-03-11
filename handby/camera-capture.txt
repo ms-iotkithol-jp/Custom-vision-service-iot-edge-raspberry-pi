@@ -2,7 +2,7 @@
 camera-capture
 
 イメージのURI：
-docker.io/embeddedgeorge/cameracapture:0.2.7-arm32v7
+docker.io/embeddedgeorge/cameracapture:0.3.0-arm32v7
 
 コンテナーの作成オプション：
 {
