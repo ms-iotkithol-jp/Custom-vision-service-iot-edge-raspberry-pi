@@ -2,7 +2,10 @@
 sensehat-display
 
 イメージのURI：
-docker.io/embeddedgeorge/sensehatdisplay:0.2.11-arm32v7
+https://hub.docker.com/r/embeddedgeorge/sensehatsense
+
+deployment.template.json の image path：
+embeddedgeorge/sensehatdisplay:0.2.11-arm32v7
 
 コンテナーの作成オプション：
 {

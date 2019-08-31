@@ -2,7 +2,10 @@
 sensehat-sense
 
 イメージのURI：
-docker.io/embeddedgeorge/sensehatsense:0.3.12-arm32v7
+https://hub.docker.com/r/embeddedgeorge/sensehatsense
+
+deployment.template.json の image path：
+embeddedgeorge/sensehatsense:0.3.12-arm32v7
 
 コンテナーの作成オプション：
 {
