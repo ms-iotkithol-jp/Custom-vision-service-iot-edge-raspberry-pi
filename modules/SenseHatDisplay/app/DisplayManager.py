@@ -116,6 +116,9 @@ class DisplayManager(object):
     def __displayImage(self, image):
         self.s.set_pixels(image)
 
+    def __displayTect(self, text):
+        self.show_message(text)
+
     def displayImage(self, strImage):
         print("Displaying " + strImage)
         if 'apple' in strImage.lower():
@@ -133,4 +136,5 @@ class DisplayManager(object):
         else:
             self.__displayImage(self.__unknown())
             self.s.clear()
+            self.__displayTect(self,strImage)
 

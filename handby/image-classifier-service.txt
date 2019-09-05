@@ -2,7 +2,10 @@
 image-classifier-service
 
 イメージのURI：
-docker.io/embeddedgeorge/imageclassifierservice:0.2.4-arm32v7
+https://hub.docker.com/r/embeddedgeorge/imageclassifierservice
+
+deployment.template.json の image path：
+embeddedgeorge/imageclassifierservice:0.2.4-arm32v7
 
 コンテナーの作成オプション：
 
