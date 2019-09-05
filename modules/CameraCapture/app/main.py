@@ -23,9 +23,6 @@ SEND_CALLBACKS = 0
 
 def send_to_Hub_callback(strMessage):
     message = IoTHubMessage(bytearray(strMessage, 'utf8'))
-    prop_map = message.properties()
-    prop_map.add("data-type","recognition")
-    prop_map.add("application","Custom-vision-service-iot-edge-raspberry-pi-ext")
     hubManager.send_event_to_output("output1", message, 0)
 
 # Callback received when the message that we're forwarding is processed.
