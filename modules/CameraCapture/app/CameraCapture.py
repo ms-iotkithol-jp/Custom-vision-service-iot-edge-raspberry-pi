@@ -105,6 +105,8 @@ class CameraCapture(object):
         headers = {'Content-Type': 'application/octet-stream'}
         try:
             response = requests.post(self.imageProcessingEndpoint, headers = headers, params = self.imageProcessingParams, data = frame)
+            print('image processing response - '+str(response.json()))
+            result = json.dumps(response.json())
         except Exception as e:
             print('__sendFrameForProcessing Excpetion -' + str(e))
             return "[]"
@@ -112,9 +114,11 @@ class CameraCapture(object):
         if self.verbose:
             try:
                 print("Response from external processing service: (" + str(response.status_code) + ") " + json.dumps(response.json()))
+                result = []
             except Exception:
                 print("Response from external processing service (status code): " + str(response.status_code))
-        return json.dumps(response.json())
+        
+        return result
 
     def __displayTimeDifferenceInMs(self, endTime, startTime):
         return str(int((endTime-startTime) * 1000)) + " ms"
