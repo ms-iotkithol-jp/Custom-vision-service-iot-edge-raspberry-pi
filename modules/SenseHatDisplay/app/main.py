@@ -35,6 +35,19 @@ def receive_message_callback(message, HubManager):
 
     return IoTHubMessageDispositionResult.ACCEPTED
 
+def method_callback(method_name, payload, user_context):
+    global DISPLAY_MANAGER
+    print('received method call:')
+    print('\tmethod name:', method_name)
+    print('\tpayload:', str(payload))
+    if (method_name=="ShowText"):
+        DISPLAY_MANAGER.displayImage(str(payload))
+
+    retval = DeviceMethodReturnValue()
+    retval.status = 200
+    retval.response = "{\"ShowText\":\"done\"}"
+    return retval
+
 class HubManager(object):
 
     def __init__(self):
@@ -50,7 +63,7 @@ class HubManager(object):
         # other inputs or to the default will be silently discarded.
         self.client.set_message_callback("input1", receive_message_callback, self)
         print ( "Module is now waiting for messages in the input1 queue.")
-
+        self.client.set_module_method_callback(method_callback, self)
         
 
 
